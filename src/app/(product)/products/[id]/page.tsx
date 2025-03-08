@@ -3,7 +3,7 @@ import Home from "@/components/Navbar";
 import { createClient } from "@/supabase/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useCallback,useState } from "react";
+import React, { useCallback,useEffect,useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ll from "@/photos/AlaskaViolet_CVecchio_KLoving_sml.webp"
@@ -27,7 +27,7 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
   const [productId, setProductId] = useState<string | null>(null);
   const router = useRouter();
 
-  useCallback(() => {
+  useEffect(() => {
     const fetchParams = async () => {
       const resolvedParams = await params;
       setProductId(resolvedParams.id);
@@ -36,7 +36,7 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
     fetchParams();
   }, [params]);
 
-  useCallback(() => {
+  useEffect(() => {
     if (!productId) return;
 
     const fetchUser = async () => {

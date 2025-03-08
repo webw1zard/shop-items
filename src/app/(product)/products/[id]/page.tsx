@@ -3,7 +3,7 @@ import Home from "@/components/Navbar";
 import { createClient } from "@/supabase/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useCallback,useEffect,useState } from "react";
+import React, {useEffect,useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ll from "@/photos/AlaskaViolet_CVecchio_KLoving_sml.webp"

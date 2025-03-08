@@ -23,7 +23,7 @@ export default function Users() {
 
   useCallback(() => {
     fetchUsers();
-  }, [users]);
+  }, [users,fetchUsers]);
 
   useEffect(() => {
     let filtered = users.filter((user) =>
@@ -35,7 +35,7 @@ export default function Users() {
     }
 
     setFilteredUsers(filtered);
-  }, [search, sortBy, users]);
+  }, [search, sortBy, users,fetchUsers]);
 
   async function fetchUsers() {
     setLoading(true);

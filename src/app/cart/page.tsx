@@ -31,26 +31,7 @@ export default function Cart() {
   const [userId, setUserId] = useState<string | null>(null);
   const [checkingUser, setCheckingUser] = useState(true);
 
-
-  useEffect(() => {
-    const getUser = async () => {
-      const { data, error } = await supabase.auth.getUser();
-      if (error || !data?.user) {
-        setUserId(null);
-      } else {
-        setUserId(data.user.id);
-      }
-      setCheckingUser(false);
-    };
-    getUser();
-  }, []);
-  
-  useEffect(() => {
-    if (userId) fetchCart();
-  }, [userId]);
-  
-
-  const fetchCart = async () => {
+const fetchCart = async () => {
     if (!userId) return;
     setLoading(true);
     const { data, error } = await supabase
@@ -65,6 +46,23 @@ export default function Cart() {
     }
     setLoading(false);
   };
+  useEffect(() => {
+    const getUser = async () => {
+      const { data, error } = await supabase.auth.getUser();
+      if (error || !data?.user) {
+        setUserId(null);
+      } else {
+        setUserId(data.user.id);
+      }
+      setCheckingUser(false);
+    };
+    getUser();
+  }, [fetchCart]);
+  
+  useEffect(() => {
+    if (userId) fetchCart();
+  }, [userId,fetchCart]);
+  
 
   const handleRemoveItem = async (id: string) => {
     const { error } = await supabase.from("cart").delete().eq("id", id);
